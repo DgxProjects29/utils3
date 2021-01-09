@@ -5,13 +5,17 @@ class CommandInvoker(click.Command):
 
     def invoke(self, ctx):
         
-        commands_path = 'dsmodule.commands.{name}'
+        commands_path = '{parent_name}module.commands.{name}'
         command_name = ctx.command.name
-        #print(ctx.parent.command.nKame)
+        parent_name = ctx.parent.command.name
+
         try:
 
             command_module = importlib.import_module(
-                commands_path.format(name = command_name)
+                commands_path.format(
+                    parent_name = parent_name,
+                    name = command_name
+                )
             )
             command = command_module.Command(ctx.params)
             command.execute()
