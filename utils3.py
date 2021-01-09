@@ -9,6 +9,10 @@ def cli():
 def ds():
     pass
 
+@cli.group(help="gmail utilities")
+def gm():
+    pass
+
 # register_command(ds, 'dsmodule/commands', 'dsmodule.ds_commands')
 
 if __name__ == '__main__':
@@ -16,6 +20,10 @@ if __name__ == '__main__':
         {
             'command': ds,
             "module": 'dsmodule.module'
+        },
+        {
+            'command': gm,
+            "module": 'gmmodule.module'
         }
     ])
     cli()
