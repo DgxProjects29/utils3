@@ -6,7 +6,7 @@ import datetime
 def login():
     
     """ 
-    login to drive
+    log in to drive
 
     """
 
@@ -26,15 +26,15 @@ def init():
 def create():
 
     """
-    upload the folders indicated in subjects structure
-    and create the subjects-map-folder-id
+    upload the folders created by init command
+    and store the ids of those folders
 
     """
 
 @click.command(cls = CommandInvoker)
 def ls():
     """
-    List available subjects with its respective id, to use in set command
+    List available subjects with its respective id,
 
     """
 
@@ -86,7 +86,9 @@ def validate_parts(ctx, param, value):
             to = int(part[double_point_idx + 1:])
             parts = [str(i) for i in range(from_, to + 1)]
         except:
-            raise click.BadParameter("Inappropriate part format")
+            raise click.BadParameter(
+                "Part format must be p or p1:p2, example: 2:4 means 'retrieve from part 2 to 4'"
+            )
     else:
         parts = [str(part)]
 
@@ -101,7 +103,7 @@ def validate_date(ctx, param, value):
         try:
             return datetime.datetime.strptime(value, str_date_formate).date()
         except:
-            raise click.BadParameter("Inappropriate date format")
+            raise click.BadParameter(f"Date format must be: {str_date_formate}")
     else:
         return value
 
@@ -109,7 +111,7 @@ def validate_date(ctx, param, value):
 def mergenotes():
 
     """
-    merge notes in current-class
+    merge all notes in current-class, ignore merged notes
     
     """
 
