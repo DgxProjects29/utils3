@@ -159,3 +159,6 @@ def tagger():
     Set the drive folder to copy files after getting its content
 
     """
+
+
+CLICK_COMMANDS = [login, init, ls, set, ts, note, mergenotes, getnotes, getimgs, syncfolder, tagger]

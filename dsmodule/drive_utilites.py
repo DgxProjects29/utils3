@@ -1,6 +1,8 @@
 from concurrent.futures import ThreadPoolExecutor
 import datetime
 
+from pydrive.settings import InvalidConfigError
+
 from core.commands_templates import CommandTemplate
 from pydrive.auth import (AuthenticationError, AuthenticationRejected,
                           GoogleAuth, InvalidCredentialsError)
@@ -30,12 +32,17 @@ class DriveCommandTemplate(CommandTemplate):
             drive = GoogleDrive(gauth)
 
             self.execute_drive_command(drive)
-        except InvalidCredentialsError as e:
-            print(str(e))
-        except AuthenticationRejected as e:
-            print(str(e))
-        except AuthenticationError as e:
-            print(str(e))
+        except InvalidCredentialsError:
+            print("[Error] We could read your credentials file, you must authenticate again")
+        except AuthenticationRejected:
+            print("[Error] Authentication failed, try again")
+        except AuthenticationError:
+            print("[Error] Authentication failed, try again")
+        except InvalidConfigError as e:
+            print(e)
+        except Exception as e:
+            print("[Error] Unexpected error, try again")
+            print(e)
     
     def execute_drive_command(self, drive):
         pass

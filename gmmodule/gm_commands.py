@@ -28,3 +28,6 @@ def user():
     save your gmail user to sign your template emails
 
     """
+
+
+CLICK_COMMANDS = [template, user]

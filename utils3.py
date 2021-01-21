@@ -13,7 +13,6 @@ def ds():
 def gm():
     pass
 
-# register_command(ds, 'dsmodule/commands', 'dsmodule.ds_commands')
 
 if __name__ == '__main__':
     register.register_commands([
